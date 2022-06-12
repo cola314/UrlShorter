@@ -24,6 +24,7 @@ class SecurityConfig(
             .authorizeRequests()
             .antMatchers("/api/auth/**").permitAll()
             .antMatchers("/h2-console/**").permitAll()
+            .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html","/swagger-ui/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -14,6 +14,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create-drop
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 jwt:
   secret: ccyMZBc+k1/Lv6bTCVfmbijnMnaMWzIaw0ReebWDDcI=
   expiration: 180000 #1000L * 60 * 3
