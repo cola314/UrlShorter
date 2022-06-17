@@ -2,6 +2,8 @@ package org.goodgoodgood.urlshorter.auth
 
 import org.goodgoodgood.urlshorter.auth.dto.GetAccountResponseDto
 import org.goodgoodgood.urlshorter.auth.dto.LoginRequestDto
+import org.goodgoodgood.urlshorter.auth.exception.UnauthorizedException
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
@@ -23,13 +25,14 @@ class AuthController(
 
     @GetMapping("/account")
     fun getAccount(
-        authentication: Authentication
+        authentication: Authentication?
     ) : ResponseEntity<GetAccountResponseDto> {
-        val username = authentication.name
+        if (authentication == null)
+            throw UnauthorizedException();
 
         return ResponseEntity
             .ok()
-            .body(accountService.getAccount(username))
+            .body(accountService.getAccount(authentication.name))
     }
 
 }
